@@ -36,7 +36,7 @@ config.font_size = 14
 
 config.window_decorations = "RESIZE"
 
-local color_scheme = "Matrix"
+local color_scheme = "DjangoRebornAgain"
 config.color_scheme = color_scheme
 
 -- shortcut_configuration
