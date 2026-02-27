@@ -7,10 +7,31 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
+-- windows specific config
+-- Detect if running on Windows
+local is_windows = wezterm.target_triple:find("windows") ~= nil
+
+if is_windows then
+    -- Only set PowerShell as default on Windows
+    config.default_prog = { 'pwsh.exe', '-NoLogo' }
+    
+    -- Optional: Add specific Windows shells to the launch menu
+    config.launch_menu = {
+        { label = 'PowerShell 7', args = { 'pwsh.exe', '-NoLogo' } },
+        { label = 'Windows PowerShell', args = { 'powershell.exe', '-NoLogo' } },
+    }
+else
+    -- Linux-specific settings (optional)
+    -- On Linux, WezTerm defaults to your user's shell (e.g., bash/zsh)
+end
+
+--
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 local tab_style = "square"
 
 config.font =
-    wezterm.font_with_fallback { "CaskaydiaMono Nerd Font Mono", "BerkeleyMono Nerd Font" }
+    wezterm.font_with_fallback { "BerkeleyMono Nerd Font", "BerkeleyMono Nerd Font" }
 config.font_size = 14
 
 config.window_decorations = "RESIZE"
